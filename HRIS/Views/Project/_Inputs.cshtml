@@ -1,0 +1,70 @@
+﻿@model APPBASE.Models.Project_DetailVM
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+            @Html.LabelFor(model => model.BIZUNIT_NM)
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.BIZUNIT_NM, new { @class = "form-control", @id = "BIZUNIT_NM" })
+                @Html.HiddenFor(model => model.BIZUNIT_RUID, new { @id = "BIZUNIT_RUID" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="cmdLookupBIZUNIT" name="cmdLookupBIZUNIT">Pilih Bisnis Unit</button>
+                </span>
+            </div>
+            @Html.ValidationMessageFor(model => model.BIZUNIT_NM)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+            @Html.LabelFor(model => model.DEPT_NM)
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.DEPT_NM, new { @class = "form-control", @id = "DEPT_NM" })
+                @Html.HiddenFor(model => model.DEPT_RUID, new { @id = "DEPT_RUID" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="cmdLookupDEPT" name="cmdLookupDEPT">Pilih Departemen</button>
+                </span>
+            </div>
+            @Html.ValidationMessageFor(model => model.BIZUNIT_NM)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-4">
+            @Html.LabelFor(model => model.PROD_NO)
+            @Html.TextBoxFor(model => model.PROD_NO, new { @class = "form-control", @id = "PROD_NO" })
+            @Html.ValidationMessageFor(model => model.PROD_NO)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+            @Html.LabelFor(model => model.PROD_NM)
+            @Html.TextBoxFor(model => model.PROD_NM, new { @class = "form-control", @id = "PROD_NM" })
+            @Html.ValidationMessageFor(model => model.PROD_NM)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-4">
+            @Html.LabelFor(model => model.PROD_QUOT_NO)
+            @Html.TextBoxFor(model => model.PROD_QUOT_NO, new { @class = "form-control", @id = "PROD_QUOT_NO" })
+            @Html.ValidationMessageFor(model => model.PROD_QUOT_NO)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+            @Html.LabelFor(model => model.PROD_CUST_NAME)
+            @Html.TextBoxFor(model => model.PROD_CUST_NAME, new { @class = "form-control", @id = "PROD_CUST_NAME" })
+            @Html.ValidationMessageFor(model => model.PROD_CUST_NAME)
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+            @Html.LabelFor(model => model.ADD_NOTE)
+            @Html.TextAreaFor(model => model.ADD_NOTE, new { @class = "form-control", @id = "ADD_NOTE" })
+            @Html.ValidationMessageFor(model => model.ADD_NOTE)
+            </div>
+          </div>
+

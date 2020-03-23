@@ -1,0 +1,67 @@
+﻿@model IEnumerable<APPBASE.Models.Complain_ListVM>
+@using APPBASE.Models
+
+@{
+    ViewBag.Title = "Complain";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string vsStsClass = "";
+}
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Jenis Complain</th>
+            <th>
+                <div>Nama Proyek</div>
+                <div>Judul Complain</div>
+            </th>
+            <th>Status</th>
+
+            <th>
+                <a href="@Url.Action("Create")" class="btn btn-primary center-block"><i class="fa fa-file"></i> Pencatatan Complain</a>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div>@Html.DisplayFor(modelItem => item.ISS_CTGRY_NM)</div>
+                <div>@Html.DisplayFor(modelItem => item.ISS_SUBCTGRY_NM)</div>
+            </td>
+            <td>
+                <div>@Html.DisplayFor(modelItem => item.PROD_NM)</div>
+                <div>@Html.DisplayFor(modelItem => item.ISS_NM)</div>
+            </td>
+            <td>
+                @if (item.ISS_STS == Complain.ISS_STS_OPEN) { vsStsClass = "label label-warning"; }
+                @if (item.ISS_STS == Complain.ISS_STS_CLOSE) { vsStsClass = "label label-success"; }
+                @if (item.ISS_STS == Complain.ISS_STS_CANCEL) { vsStsClass = "label label-danger"; }
+                <span class="@vsStsClass">@Html.DisplayFor(modelItem => item.ISS_STS_NM)</span>
+                
+            </td>
+            <td>
+                <div class="btn-group dropup">
+                  <button type="button" class="btn btn-default">Action</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <!-- Dropdown menu links -->
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.RUID })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.RUID })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.RUID })</li>
+                    <li>@Html.ActionLink("Response", "Response", new { id = item.RUID })</li>
+                    <li>@Html.ActionLink("Close", "Close", new { id = item.RUID })</li>
+                    <li>@Html.ActionLink("Cancel", "Cancel", new { id = item.RUID })</li>
+                  </ul>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

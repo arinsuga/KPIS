@@ -1,0 +1,95 @@
+﻿@model APPBASE.Models.Complain_DetailVM
+@using APPBASE.Helpers
+@using APPBASE.Models
+@{string vsStsClass = "";}
+
+          @if (Model.ISS_STS == Complain.ISS_STS_OPEN) { vsStsClass = "alert alert-warning"; }
+          @if (Model.ISS_STS == Complain.ISS_STS_CLOSE) { vsStsClass = "alert alert-success"; }
+          @if (Model.ISS_STS == Complain.ISS_STS_CANCEL) { vsStsClass = "alert alert-danger"; }
+          <div style="text-align:center;" class="@vsStsClass" role="alert">
+            @Html.DisplayFor(model => model.ISS_STS_NM)
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.PROD_NM)
+                @Html.TextBoxFor(model => model.PROD_NM, new { @class = "form-control", @id = "PROD_NM", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_SUBCTGRY_NM)
+                @Html.TextBoxFor(model => model.ISS_SUBCTGRY_NM, new { @class = "form-control", @id = "ISS_SUBCTGRY_NM", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_NM)
+                @Html.TextBoxFor(model => model.ISS_NM, new { @class = "form-control", @id = "ISS_NM", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-4">
+                @Html.LabelFor(model => model.ISS_DT)
+                @Html.TextBoxFor(model => model.ISS_DT, new { @class = "FieldAsDate form-control", @id = "ISS_DT", @Value = hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.ISS_DT), @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-4">
+                @Html.LabelFor(model => model.ISS_FNSH_TRGT_DT)
+                @Html.TextBoxFor(model => model.ISS_FNSH_TRGT_DT, new { @class = "FieldAsDate form-control", @id = "ISS_FNSH_TRGT_DT", @Value = hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.ISS_FNSH_TRGT_DT), @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.ISS_PIC_PERSON)
+                @Html.TextBoxFor(model => model.ISS_PIC_PERSON, new { @class = "form-control", @id = "ISS_PIC_PERSON", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.ISS_RCVR_PERSON)
+                @Html.TextBoxFor(model => model.ISS_RCVR_PERSON, new { @class = "form-control", @id = "ISS_RCVR_PERSON", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.ISS_REC_PERSON)
+                @Html.TextBoxFor(model => model.ISS_REC_PERSON, new { @class = "form-control", @id = "ISS_REC_PERSON", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_DESC)
+                @Html.TextAreaFor(model => model.ISS_DESC, new { @class = "form-control", @id = "ISS_DESC", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_DESC_ANLZ)
+                @Html.TextAreaFor(model => model.ISS_DESC_ANLZ, new { @class = "form-control", @id = "ISS_DESC_ANLZ", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_DESC_ACT_SHORT)
+                @Html.TextAreaFor(model => model.ISS_DESC_ACT_SHORT, new { @class = "form-control", @id = "ISS_DESC_ACT_SHORT", @disabled = "Disabled" })
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+                @Html.LabelFor(model => model.ISS_DESC_ACT_LONG)
+                @Html.TextAreaFor(model => model.ISS_DESC_ACT_LONG, new { @class = "form-control", @id = "ISS_DESC_ACT_LONG", @disabled = "Disabled" })
+            </div>
+          </div>

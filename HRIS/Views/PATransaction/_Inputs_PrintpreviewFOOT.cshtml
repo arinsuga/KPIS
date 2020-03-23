@@ -1,0 +1,46 @@
+﻿@model APPBASE.Models.PATransaction_DetailVM
+@using APPBASE.Helpers
+@using APPBASE.Svcbiz
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>TOTAL SCORE</th>
+            <th>Bobot</th>
+            <th>Score</th>
+            <th>Score x Bobot</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Kompetensi</td>
+            <td>@Html.DisplayFor(model => model.CPY_WGHT)</td>
+            <td>@Html.DisplayFor(model => model.CPY_SR)</td>
+            <td>@Html.DisplayFor(model => model.CPY_SRBYWGHT)</td>
+        </tr>
+        <tr>
+            <td>KPI</td>
+            <td>@Html.DisplayFor(model => model.KPI_WGHT)</td>
+            <td>@Html.DisplayFor(model => model.KPI_SR)</td>
+            <td>@Html.DisplayFor(model => model.KPI_SRBYWGHT)</td>
+        </tr>
+        <tr>
+            <td colspan="3">Final Score</td>
+            <td>@Html.DisplayFor(model => model.FINAL_SR)</td>
+        </tr>
+        <tr>
+            <td colspan="3">Performance Rating</td>
+            <td>@Html.DisplayFor(model => model.FINAL_NM)</td>
+        </tr>
+    </tbody>
+</table>
+

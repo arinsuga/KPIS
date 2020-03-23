@@ -1,0 +1,66 @@
+﻿@model APPBASE.Models.Complain
+
+@{
+    ViewBag.Title = "Rincian Complain";
+    ViewBag.Action = "CREATE";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    Html.RenderPartial("_Inputs");
+
+    <div>
+        <button type="submit" class="btn btn-default">Simpan Data</button>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    
+}
+
+<div id="DialogLookup"><div id="DialogLookupContent"></div></div>
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*=========================================
+        INITIALIZE
+        =========================================*/
+        //Dialog Lookup
+        initDlgLookUp('#DialogLookup');
+        //Date Picker Field
+        initDatePickerShortV2(".FieldAsDate");
+        /*=========================================
+        EVENTS
+        =========================================*/
+        //Command LookUp [Bizunit=SEARCHVALUE]
+        $("#cmdLookupPROD").click(function () {
+            var vaSearchValue = new Array();
+            vaSearchValue[0] = "";
+            //            vaSearchValue[1] = "Data array 2";
+            //            vaSearchValue[2] = "Data array 3";
+            var vaTargetTag = new Array();
+            vaTargetTag[0] = 'PROD_RUID'; //RUID
+            vaTargetTag[1] = '';   //ID
+            vaTargetTag[2] = 'PROD_NM'; //NM
+            showLookup('Lookup/ShowPjx', '', vaSearchValue, vaTargetTag);
+        }); //End  $("#btnLookup").click
+        //Command LookUp [Department=SEARCHVALUE]
+        $("#cmdLookupISS_SUBCTGRY").click(function () {
+            var vaSearchValue = new Array();
+            vaSearchValue[0] = "";
+            //            vaSearchValue[1] = "Data array 2";
+            //            vaSearchValue[2] = "Data array 3";
+            var vaTargetTag = new Array();
+            vaTargetTag[0] = 'ISS_SUBCTGRY'; //RUID
+            vaTargetTag[1] = 'ISS_CTGRY';   //ID
+            vaTargetTag[2] = 'ISS_SUBCTGRY_NM'; //NM
+            showLookup('Lookup/ShowIssSubCtgry', '', vaSearchValue, vaTargetTag);
+        }); //End  $("#btnLookup").click
+    }); //End $(document).ready
+</script>
+}

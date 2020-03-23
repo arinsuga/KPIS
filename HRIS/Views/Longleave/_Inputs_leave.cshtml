@@ -1,0 +1,292 @@
+﻿@model APPBASE.Models.Longleave_DetailVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+
+        <div class="row">
+            @Html.HiddenFor(model => model.LEAVE_RUID, new { id = "LEAVE_RUID" })
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVE_NM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVE_NM">Cuti Besar</label>
+                    <input type="text" id="LEAVE_NM" name="LEAVE_NM" value="@Html.DisplayFor(model => model.LEAVE_NM)" class="form-control" readonly />
+
+                    @if (ViewData.ModelState["LEAVE_NM1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_NM1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVE_NM2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_NM2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVE_DT0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVE_DT">Tanggal Pengajuan</label>
+                    <input type="text" id="LEAVE_DT" name="LEAVE_DT" value="@Html.DisplayFor(model => model.LEAVE_DT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+
+            
+                    @if (ViewData.ModelState["LEAVE_DT1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_DT1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVE_DT2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_DT2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <hr />
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVEFR_DT0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVEFR_DT">Dari Tanggal</label>
+                    <input type="text" id="LEAVEFR_DT" name="LEAVEFR_DT" value="@Html.DisplayFor(model => model.LEAVEFR_DT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+
+            
+                    @if (ViewData.ModelState["LEAVEFR_DT1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVEFR_DT1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVEFR_DT2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVEFR_DT2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVETO_DT0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVETO_DT">Sampai Tanggal</label>
+                    <input type="text" id="LEAVETO_DT" name="LEAVETO_DT" value="@Html.DisplayFor(model => model.LEAVETO_DT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+
+            
+                    @if (ViewData.ModelState["LEAVETO_DT1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVETO_DT1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVETO_DT2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVETO_DT2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVE_NUM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVE_NUM">Jumlah Hari</label>
+                    <input type="text" id="LEAVE_NUM" name="LEAVE_NUM" value="@Html.DisplayFor(model => model.LEAVE_NUM)" class="form-control" readonly />
+
+                    @if (ViewData.ModelState["LEAVE_NUM1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_NUM1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVE_NUM2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_NUM2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <hr />
+
+        <div class="row">
+            @Html.HiddenFor(model => model.REPLRES_RUID, new { id = "REPLRES_RUID" })
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["REPLRES_NM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="REPLRES_NM">Pengganti Sementara</label>
+
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="REPLRES_NM" name="REPLRES_NM" value="@Html.DisplayFor(model => model.REPLRES_NM)" class="form-control" readonly />
+                        <span class="input-group-btn">
+                            <button type="button" id="cmdLookupREPLRES_NM" name="cmdLookupREPLRES_NM" class="btn btn-info btn-flat" data-toggle="modal" data-target="#DialogLookup" @vsDisableButton><i class="fa fa-search"></i></button>
+                        </span>
+                    </div><!-- /input-group -->
+
+            
+                    @if (ViewData.ModelState["REPLRES_NM1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("REPLRES_NM1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["REPLRES_NM2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("REPLRES_NM2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <div class="row">
+            @Html.HiddenFor(model => model.APVRES_RUID, new { id = "APVRES_RUID" })
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["APVRES_NM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="APVRES_NM">Disetujui Oleh</label>
+
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="APVRES_NM" name="APVRES_NM" value="@Html.DisplayFor(model => model.APVRES_NM)" class="form-control" readonly />
+                        <span class="input-group-btn">
+                            <button type="button" id="cmdLookupAPVRES_NM" name="cmdLookupAPVRES_NM" class="btn btn-info btn-flat" data-toggle="modal" data-target="#DialogLookup" @vsDisableButton><i class="fa fa-search"></i></button>
+                        </span>
+                    </div><!-- /input-group -->
+
+            
+                    @if (ViewData.ModelState["APVRES_NM1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("APVRES_NM1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["APVRES_NM2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("APVRES_NM2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <div class="row">
+            @Html.HiddenFor(model => model.KNOWNBYRES_RUID, new { id = "KNOWNBYRES_RUID" })
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["KNOWNBYRES_NM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="KNOWNBYRES_NM">Diketahui Oleh</label>
+
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="KNOWNBYRES_NM" name="KNOWNBYRES_NM" value="@Html.DisplayFor(model => model.KNOWNBYRES_NM)" class="form-control" readonly />
+                        <span class="input-group-btn">
+                            <button type="button" id="cmdLookupKNOWNBYRES_NM" name="cmdLookupKNOWNBYRES_NM" class="btn btn-info btn-flat" data-toggle="modal" data-target="#DialogLookup" @vsDisableButton><i class="fa fa-search"></i></button>
+                        </span>
+                    </div><!-- /input-group -->
+
+            
+                    @if (ViewData.ModelState["KNOWNBYRES_NM1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("KNOWNBYRES_NM1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["KNOWNBYRES_NM2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("KNOWNBYRES_NM2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <hr />
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["LEAVE_ADDRESS0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="LEAVE_ADDRESS">Alamat Saat Cuti</label>
+                    <textarea id="LEAVE_ADDRESS" name="LEAVE_ADDRESS" class="form-control" @vsReadonlyTextbox>@Html.DisplayFor(model => model.LEAVE_ADDRESS)</textarea>
+
+
+                    @if (ViewData.ModelState["LEAVE_ADDRESS1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_ADDRESS1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["LEAVE_ADDRESS2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("LEAVE_ADDRESS2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                @if (ViewData.ModelState["NOTES0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                <div class="form-group @vsErrClass">
+                    <label for="NOTES">Catatan</label>
+                    <textarea id="NOTES" name="NOTES" class="form-control" @vsReadonlyTextbox>@Html.DisplayFor(model => model.NOTES)</textarea>
+
+                    @if (ViewData.ModelState["NOTES1"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("NOTES1")
+                            </label>
+                    }
+                    @if (ViewData.ModelState["NOTES2"] != null)
+                    {
+                            <label class="control-label" for="inputError">
+                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("NOTES2")
+                            </label>
+                    }
+                </div> <!-- /.form-group -->
+            </div> <!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+
+
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+
+

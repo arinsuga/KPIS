@@ -1,0 +1,107 @@
+﻿@model IEnumerable<APPBASE.Models.Complain_LogbookVM>
+@using APPBASE.Helpers
+@using APPBASE.Models
+
+@{
+    ViewBag.Title = "Logbook Customer Complain";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+    string vsStsClass = "";
+}
+
+<div class="box">
+    <div class="box-body table-responsive">
+        <div id="Cobainsert" class="hide-on-toggle">
+        </div>
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                        <th>@Html.DisplayNameFor(model => model.PROD_NO)</th>
+                        <th>@Html.DisplayNameFor(model => model.PROD_NM)</th>
+                        <th>@Html.DisplayNameFor(model => model.PJX_STS_NM)</th>
+                        <th>@Html.DisplayNameFor(model => model.PJX_TRGT_END.Value.Year)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_DT)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_RCVR_PERSON)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_REC_PERSON)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_SUBCTGRY_NM)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_DESC)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_PIC_PERSON)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_RSPNS_DT)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_DESC_ANLZ)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_DESC_ACT_SHORT)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_FNSH_TRGT_DT)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_FNSH_ACT_DT)</th>
+                        <th>@Html.DisplayNameFor(model => model.ISS_STS_NM)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PROD_NO)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PROD_NM)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PJX_STS_NM)</td>
+
+
+                        @if (item.PJX_TRGT_END != null)
+                        { <td>@Html.DisplayFor(modelItem => item.PJX_TRGT_END.Value.Year)</td> }
+                        else
+                        { <td>@Html.DisplayFor(modelItem => item.PJX_TRGT_END)</td> }
+                        
+                        <td>@Html.DisplayFor(modelItem => item.ISS_DT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_RCVR_PERSON)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_REC_PERSON)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_SUBCTGRY_NM)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_DESC)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_PIC_PERSON)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_RSPNS_DT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_DESC_ANLZ)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_DESC_ACT_SHORT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_FNSH_TRGT_DT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_FNSH_ACT_DT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ISS_STS_NM)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*=========================================
+        INITIALIZE
+        =========================================*/
+        var table = $('#example1').DataTable({
+                      "scrollX": true,
+                      "dom": 'T<"clear">lfrtip',
+                      "tableTools": {
+                          "sSwfPath": sSwfPath,
+                          "aButtons": [
+                      "copy",
+                      "print",
+                      {
+                          "sExtends": "collection",
+                          "sButtonText": "Save",
+                          "aButtons": ["csv", "xls", "pdf"]
+                      }
+                      ]
+                  }
+              });
+        var tt = new $.fn.dataTable.TableTools(table);
+        $(tt.fnContainer()).insertBefore('div.dataTables_wrapper');
+
+        /*=========================================
+        EVENTS
+        =========================================*/
+    }); //End $(document).ready
+</script>
+}
+
+
+

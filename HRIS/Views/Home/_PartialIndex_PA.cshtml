@@ -1,0 +1,29 @@
+﻿<input type="hidden" id="dataExcellent" name="dataExcellent" value="@ViewBag.dataExcellent" />
+<input type="hidden" id="dataVeryGood" name="dataVeryGood" value="@ViewBag.dataVeryGood" />
+<input type="hidden" id="dataGood" name="dataGood" value="@ViewBag.dataGood" />
+<input type="hidden" id="dataAverage" name="dataAverage" value="@ViewBag.dataAverage" />
+<input type="hidden" id="dataPoor" name="dataPoor" value="@ViewBag.dataPoor" />
+<input type="hidden" id="dataVeryPoor" name="dataVeryPoor" value="@ViewBag.dataVeryPoor" />
+<input type="hidden" id="dataUndefined" name="dataUndefined" value="@ViewBag.dataUndefined" />
+
+@{int i = 0;}
+@foreach (var item in ViewBag.PAScore)
+{
+    i++;
+    
+    <input type="hidden" id="dataName_@i" name="dataName_@i" value="@item.FINAL_SR_NM" />
+    <input type="hidden" id="dataValue_@i" name="dataValue_@i" value="@item.FINAL_SR_NUM" />
+    
+}
+
+<!-- Donut chart -->
+<div class="box box-info">
+    <div class="box-header">
+        <i class="fa fa-bar-chart-o"></i>
+        <h3 class="box-title">Info Performance Appraisal</h3>
+    </div>
+    <div class="box-body">
+        <div id="donut-chart" style="height: 300px;"></div>
+    </div><!-- /.box-body-->
+</div><!-- /.box -->
+

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Hapus Data Proyek";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="alert alert-warning" role="alert">Apakah Proyek mau dihapus?</div>
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+    @{Html.RenderPartial("_Details");}
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <button type="submit" class="btn btn-default">Hapus Proyek</button> |
+        @Html.ActionLink("Kembali", "Index")
+    </p>
+}

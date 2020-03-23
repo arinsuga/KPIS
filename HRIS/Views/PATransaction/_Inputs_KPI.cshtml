@@ -1,0 +1,166 @@
+﻿@model APPBASE.Models.PATransaction_DetailVM
+@using APPBASE.Helpers
+@using APPBASE.Svcbiz
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-bordered">
+    <tr>
+        <th style="width: 10px">#</th>
+        <th>KPI</th>
+        <th>Bobot (%)</th>
+        <th>Target</th>
+        <th>Pencapaian</th>
+    </tr>
+
+    @{int i = 0; int nNo = 0;}
+    @{
+        string sSelectedPCT = "";
+        string sSelectedVAL = "";
+        string sSelectedQTY = "";
+        string sSelectedUNT = "";
+        string sSelectedMNYRP = "";
+        string sSelectedMNYUSD = "";
+    }
+    @if (Model.KPI != null)
+    {
+        foreach (var item in Model.KPI)
+        {
+            <input type="hidden" id="KPI[@i].RUID" name="KPI[@i].RUID" value="@Html.DisplayFor(model => item.RUID)" />
+            <input type="hidden" id="KPI[@i].TRNPA_RUID" name="KPI[@i].TRNPA_RUID" value="@Html.DisplayFor(model => item.TRNPA_RUID)" />
+            <input type="hidden" id="KPI[@i].PACPT_RUID" name="KPI[@i].PACPT_RUID" value="@Html.DisplayFor(model => item.PACPT_RUID)" />
+            <input type="hidden" id="KPI[@i].PACPT_ID" name="KPI[@i].PACPT_ID"/>
+            <input type="hidden" id="KPI[@i].PACPT_NM" name="KPI[@i].PACPT_NM"/>
+            <input type="hidden" id="KPI[@i].PACPT_RSEQNO" name="KPI[@i].PACPT_RSEQNO"/>
+            <input type="hidden" id="KPI[@i].PACPT_TYPE" name="KPI[@i].PACPT_TYPE"/>
+            <input type="hidden" id="KPI[@i].PACPT_SUBTYPE" name="KPI[@i].PACPT_SUBTYPE"/>
+            <input type="hidden" id="KPI[@i].PACPT_LVL" name="KPI[@i].PACPT_LVL"/>
+            <input type="hidden" id="KPI[@i].PACPT_PARENT" name="KPI[@i].PACPT_PARENT"/>
+            <input type="hidden" id="KPI[@i].PACPT_DISPID" name="KPI[@i].PACPT_DISPID"/>
+
+            
+            <input type="hidden" id="KPI[@i].TRGT_NM" name="KPI[@i].TRGT_NM"/>
+            <input type="hidden" id="KPI[@i].TRGT_SEQ1" name="KPI[@i].TRGT_SEQ1"/>
+            <input type="hidden" id="KPI[@i].TRGT_SYM" name="KPI[@i].TRGT_SYM"/>
+                
+            if (item.PACPT_SUBTYPE == valFLAG.FLAG_PACPTSUBTYPE_GRP)
+            {
+                nNo = 0;
+                <tr><td colspan="5">@Html.DisplayFor(model => item.PACPT_NM)</td></tr>
+            }
+
+            if (item.PACPT_SUBTYPE == valFLAG.FLAG_PACPTSUBTYPE_ITM)
+            {
+                nNo++;
+                <tr>
+                    <td>@nNo.</td>
+                    <td>@Html.DisplayFor(model => item.PACPT_NM)</td>
+                    
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @if (ViewData.ModelState["WGHT_VAL0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                                <div class="form-group @vsErrClass">
+                                    <input type="text" id="KPI[@i].WGHT_VAL" name="KPI[@i].WGHT_VAL" value="@Html.DisplayFor(model => item.WGHT_VAL)" class="form-control data-mask-decimal-percentage" @vsReadonlyTextbox />
+
+                                    @if (ViewData.ModelState["WGHT_VAL1"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("WGHT_VAL1")
+                                            </label>
+                                    }
+                                    @if (ViewData.ModelState["WGHT_VAL2"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("WGHT_VAL2")
+                                            </label>
+                                    }
+                                </div> <!-- /.form-group -->
+                            </div> <!-- /.col-xs-12 -->
+                        </div><!-- /.row -->
+                    </td> <!-- WGHT_VAL -->
+                    
+                    <td>
+                    @{
+                        sSelectedPCT = "";
+                        sSelectedVAL = "";
+                        sSelectedQTY = "";
+                        sSelectedUNT = "";
+                        sSelectedMNYRP = "";
+                        sSelectedMNYUSD = "";
+
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_PCT) { sSelectedPCT = "selected"; }
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_VAL) { sSelectedVAL = "selected"; }
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_QTY) { sSelectedQTY = "selected"; }
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_UNT) { sSelectedUNT = "selected"; }
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_MNYRP) { sSelectedMNYRP = "selected"; }
+                        if (item.TRGT_UOM == valFLAG.FLAG_UOM_MNYUSD) { sSelectedMNYUSD = "selected"; }
+                    }
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group @vsErrClass">
+                                    @if (ViewData.ModelState["TRGT_VAL0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                                    <div class="input-group">
+                                        <input type="text" id="KPI[@i].TRGT_VAL" name="KPI[@i].TRGT_VAL" value="@Html.DisplayFor(model => item.TRGT_VAL)" class="form-control data-mask-decimal" @vsReadonlyTextbox />
+                                        <div class="input-group-btn">
+                                            <select class="btn" id="KPI[@i].TRGT_UOM" name="KPI[@i].TRGT_UOM">
+                                                <option value="LOV_UOM_VAL" @sSelectedVAL></option>
+                                                <option value="LOV_UOM_PCT" @sSelectedPCT>%</option>
+                                                <option value="LOV_UOM_UNT" @sSelectedUNT>Unit</option>
+                                            </select>
+                                        </div><!-- /btn-group -->
+                                    </div> <!-- /.input-group -->
+                                       
+                                    @if (ViewData.ModelState["TRGT_VAL1"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TRGT_VAL1")
+                                            </label>
+                                    }
+                                    @if (ViewData.ModelState["TRGT_VAL2"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TRGT_VAL2")
+                                            </label>
+                                    }
+                                </div> <!-- /.form-group -->
+                            </div> <!-- /.col-xs-12 -->
+                        </div><!-- /.row -->
+                    </td> <!-- TRGT_VAL -->
+                    
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @if (ViewData.ModelState["ACMT_VAL0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                                <div class="form-group @vsErrClass">
+                                    <input type="text" id="KPI[@i].ACMT_VAL" name="KPI[@i].ACMT_VAL" value="@Html.DisplayFor(model => item.ACMT_VAL)" class="form-control data-mask-decimal" @vsReadonlyTextbox />
+
+                                    @if (ViewData.ModelState["ACMT_VAL1"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ACMT_VAL1")
+                                            </label>
+                                    }
+                                    @if (ViewData.ModelState["ACMT_VAL2"] != null)
+                                    {
+                                            <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ACMT_VAL2")
+                                            </label>
+                                    }
+                                </div> <!-- /.form-group -->
+                            </div> <!-- /.col-xs-12 -->
+                        </div><!-- /.row -->
+                    </td> <!-- ACMT_VAL -->
+                </tr>
+            }
+
+            i++;
+        }
+    }
+</table>

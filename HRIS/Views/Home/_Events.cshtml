@@ -1,0 +1,122 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        /*=========================================
+        INITIALIZE
+        =========================================*/
+        //Make the dashboard widgets sortable Using jquery UI
+        $(".connectedSortable").sortable({
+            placeholder: "sort-highlight",
+            connectWith: ".connectedSortable",
+            handle: ".box-header, .nav-tabs",
+            forcePlaceholderSize: true,
+            zIndex: 999999
+        }).disableSelection();
+        $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+
+        /*=========================================
+        EVENTS
+        =========================================*/
+        //jQuery UI sortable for the longleave
+        $(".todo-list").sortable({
+            placeholder: "sort-highlight",
+            handle: ".handle",
+            forcePlaceholderSize: true,
+            zIndex: 999999
+        }).disableSelection();
+
+        //The Calender
+        $("#calendar").datepicker();
+
+
+        /*
+        * DONUT CHART
+        * -----------
+        */
+//        var dataExcellent = $("#dataExcellent").val();
+//        var dataVeryGood = $("#dataVeryGood").val();
+//        var dataGood = $("#dataGood").val();
+//        var dataAverage = $("#dataAverage").val();
+//        var dataPoor = $("#dataPoor").val();
+//        var dataVeryPoor = $("#dataVeryPoor").val();
+//        var dataUndefined = $("#dataUndefined").val();
+
+        var dataName_1 = $("#dataName_1").val()
+        var dataValue_1 = $("#dataValue_1").val()
+
+        var dataName_2 = $("#dataName_2").val()
+        var dataValue_2 = $("#dataValue_2").val()
+
+        var dataName_3 = $("#dataName_3").val()
+        var dataValue_3 = $("#dataValue_3").val()
+
+        var dataName_4 = $("#dataName_4").val()
+        var dataValue_4 = $("#dataValue_4").val()
+
+        var dataName_5 = $("#dataName_5").val()
+        var dataValue_5 = $("#dataValue_5").val()
+
+        var dataName_6 = $("#dataName_6").val()
+        var dataValue_6 = $("#dataValue_6").val()
+
+        var dataName_7 = $("#dataName_7").val()
+        var dataValue_7 = $("#dataValue_7").val()
+
+        var dataName_8 = $("#dataName_8").val()
+        var dataValue_8 = $("#dataValue_8").val()
+
+        var donutData = [
+                    { label: dataName_1, data: dataValue_1, color: "#F56954" },
+                    { label: dataName_2, data: dataValue_2, color: "#F39C12" },
+                    { label: dataName_3, data: dataValue_3, color: "#00A65A" },
+                    { label: dataName_4, data: dataValue_4, color: "#39CCCC" },
+                    { label: dataName_5, data: dataValue_5, color: "#00C0EF" },
+                    { label: dataName_6, data: dataValue_6, color: "#0073B7" },
+                    { label: dataName_7, data: dataValue_7, color: "#0073B7" },
+                    { label: dataName_8, data: dataValue_8, color: "#838383" }
+                ];
+
+//        var donutData = [
+//                    { label: "Excellent", data: dataExcellent, color: "#0073B7" },
+//                    { label: "Very Good", data: dataVeryGood, color: "#00C0EF" },
+//                    { label: "Good", data: dataGood, color: "#39CCCC" },
+//                    { label: "Average", data: dataAverage, color: "#00A65A" },
+//                    { label: "Poor", data: dataPoor, color: "#F39C12" },
+//                    { label: "Very Poor", data: dataVeryPoor, color: "#F56954" },
+//                    { label: "Undefined", data: dataUndefined, color: "#838383" }
+//                ];
+
+        $.plot("#donut-chart", donutData, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    innerRadius: 0.5,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+        /*
+        * END DONUT CHART
+        */
+        /*
+        * Custom Label formatter
+        * ----------------------
+        */
+        function labelFormatter(label, series) {
+            return "<div style='font-size:10px; text-align:center; padding:2px; color: #fff; font-weight: 600;'>"
+                        + label
+                        + "<br/>"
+                        + Math.round(series.percent) + "%</div>";
+        }
+
+    });  //End $(document).ready
+</script>

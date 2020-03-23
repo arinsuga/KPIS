@@ -1,0 +1,81 @@
+﻿@model IEnumerable<APPBASE.Models.PATransaction_ListVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcbiz
+
+@{
+    ViewBag.Title = "Info Form Penilaian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{string vsClassBP_STS = "";}
+
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+        <div class="box-tools">
+            <div class="input-group">
+                <input type="text" id="searchValue" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Cari Karyawan"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-flat btn-sm btn-info"><i class="fa fa-search"></i></button>
+                    <a href="@Url.Action("Create")" class="btn btn-flat btn-sm btn-warning" style="margin-left:5px; color:White;"><i class="fa fa-plus"></i> Buat Form Penilaian</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-xs-2">Action</th>
+                    <th class="col-xs-4">Nama Karyawan</th>
+                    <th class="col-xs-6">
+                        <div>Unit Kerja / Sub Unit Kerja</div>
+                        <div>Jabatan</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null) {
+                    <tr>
+                        <td colspan="2" align="center">@{Html.RenderPartial("_PartialEmpty");}</td>
+                    </tr>
+                }
+
+                @foreach (var item in Model)
+                {
+                    
+                    <tr>
+                        <td class="col-xs-2">
+                            <a href="@Url.Action("Details", new { id = item.RUID })" class="btn btn-flat btn-sm btn-success" style="margin-left:5px; color:White;"><i class="fa fa-eye"></i> View Detail</a>
+                        </td>
+                        <td class="col-xs-4 SEARCHABLE_ROWS">@Html.DisplayFor(modelItem => item.RES_NM1)</td>
+                        <td class="col-xs-6">
+                            <div>@Html.DisplayFor(modelItem => item.JOBTTLGRP_NM) / @Html.DisplayFor(modelItem => item.JOBTTLSUBGRP_NM)</div>
+                            <div>@Html.DisplayFor(modelItem => item.JOBTTL_NM)</div>
+                            <div>Class @Html.DisplayFor(modelItem => item.COEFFCLS_NM) ( @Html.DisplayFor(modelItem => item.JTLCLS_NM) )</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+@section scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*=========================================
+        INITIALIZE
+        =========================================*/
+        doSearchAbleTable('#searchValue', '', '.SEARCHABLE_ROWS');
+
+        /*=========================================
+        EVENTS
+        =========================================*/
+    });   //End $(document).ready
+</script>
+
+}
+

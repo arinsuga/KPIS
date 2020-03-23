@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section includeTOP {
+    <!-- Optional if contains Datepicker -->
+    @Styles.Render("~/Content/cssDatepicker")
+}
+
+@section includeBOTTOM {
+    <!-- Optional if contains Datepicker -->
+    @Scripts.Render("~/bundles/JSDatepicker")
+    <!-- Optional if contains Chart float -->
+    @Scripts.Render("~/bundles/JSChartfloat")
+}
+
+
+@section TitleIcon {
+    <i class="fa fa-home"></i>
+}
+
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>@ViewBag.PRMT</h3>
+                <p>Karyawan Permanen</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person"></i>
+            </div>
+            <a href="@Url.Action("Previewlist", "Employee", new { id = 1 })" class="small-box-footer">
+                Lihat Daftar <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>@ViewBag.CONT</h3>
+                <p>Karyawan Kontrak</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person"></i>
+            </div>
+            <a href="@Url.Action("Previewlist", "Employee", new { id = 2 })" class="small-box-footer">
+                Lihat Daftar <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>@ViewBag.PROB</h3>
+                <p>Karyawan Orientasi</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person"></i>
+            </div>
+            <a href="@Url.Action("Previewlist", "Employee", new { id = 3 })" class="small-box-footer">
+                Lihat Daftar <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>@ViewBag.OUTSRC</h3>
+                <p>Outsource</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person"></i>
+            </div>
+            <a href="@Url.Action("Previewlist", "Employee", new { id = 4 })" class="small-box-footer">
+                Lihat Daftar <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+</div><!-- /.row -->
+
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-7 connectedSortable">
+        <!-- Info PA -->
+        @{Html.RenderPartial("_PartialIndex_PA");}
+    </section><!-- /.col-lg-7 connectedSortable -->
+    
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-5 connectedSortable">
+        <!-- Info Cuti Besar -->
+        @{Html.RenderPartial("_PartialIndex_longleave");}
+        <!-- Info Absensi -->
+        @{Html.RenderPartial("_PartialIndex_absen");}
+        <!-- Calendar -->
+        @{Html.RenderPartial("_PartialIndex_calendar");}
+    </section><!-- /.col-lg-5 connectedSortable -->
+</div><!-- /.row -->
+
+@section scripts {
+
+<!-- Events -->
+@{Html.RenderPartial("_Events");}
+
+}
+

@@ -1,0 +1,77 @@
+﻿@model APPBASE.Models.PAEmployeejobtitle_DetailVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+
+<div class="row">
+    @Html.HiddenFor(model => model.RES_RUID, new { id = "RES_RUID" })
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["RES_NM10"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="RES_NM1">Nama Karyawan</label>
+
+
+            <div class="input-group input-group-sm">
+                <input type="text" id="RES_NM1" name="RES_NM1" value="@Html.DisplayFor(model => model.RES_NM1)" class="form-control" readonly />
+                <span class="input-group-btn">
+                    <button type="button" id="cmdLookupRES_NM1" name="cmdLookupRES_NM1" class="btn btn-info btn-flat" data-toggle="modal" data-target="#DialogLookup" @vsDisableButton><i class="fa fa-search"></i></button>
+                </span>
+            </div><!-- /input-group -->
+
+            
+            @if (ViewData.ModelState["RES_NM11"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RES_NM11")
+                    </label>
+            }
+            @if (ViewData.ModelState["RES_NM12"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RES_NM12")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+
+
+<div class="row">
+    @Html.HiddenFor(model => model.JOBTTL_RUID, new { id = "JOBTTL_RUID" })
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["JOBTTL_NM0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="JOBTTL_NM">Mapping Jabatan</label>
+
+
+            <div class="input-group input-group-sm">
+                <input type="text" id="JOBTTL_NM" name="JOBTTL_NM" value="@Html.DisplayFor(model => model.JOBTTL_NM)" class="form-control" readonly />
+                <span class="input-group-btn">
+                    <button type="button" id="cmdLookupJOBTTL_NM" name="cmdLookupJOBTTL_NM" class="btn btn-info btn-flat" data-toggle="modal" data-target="#DialogLookup" @vsDisableButton><i class="fa fa-search"></i></button>
+                </span>
+            </div><!-- /input-group -->
+
+            
+            @if (ViewData.ModelState["JOBTTL_NM1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("JOBTTL_NM1")
+                    </label>
+            }
+            @if (ViewData.ModelState["JOBTTL_NM2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("JOBTTL_NM2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+

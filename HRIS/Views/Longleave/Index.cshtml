@@ -1,0 +1,90 @@
+﻿@model IEnumerable<APPBASE.Models.Longleave_ListVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcbiz
+
+@{
+    ViewBag.Title = "Info Cuti Besar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section TitleIcon {
+    <i class="fa fa-suitcase"></i>
+}
+
+@{string vsClassBP_STS = "";}
+
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+        <div class="box-tools">
+            <div class="input-group">
+                <input type="text" id="searchValue" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Cari Nama"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-flat btn-sm btn-info"><i class="fa fa-search"></i></button>
+                    <a href="@Url.Action("Create")" class="btn btn-flat btn-sm btn-warning" style="margin-left:5px; color:White;"><i class="fa fa-plus"></i> Proses Cuti Besar</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-xs-6">Nama</th>
+                    <th class="col-xs-3">Departemen/Jabatan</th>
+                    <th class="col-xs-3">Periode Cuti</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null) {
+                    <tr>
+                        <td colspan="3" align="center">@{Html.RenderPartial("_PartialEmpty");}</td>
+                    </tr>
+                }
+
+                @foreach (var item in Model)
+                {
+                    
+                    <tr>
+                        <td class="col-xs-6 SEARCHABLE_ROWS">
+                            <div>@Html.DisplayFor(modelItem => item.RES_NM)</div>
+                            <div class="btn-group">
+                                <a href="@Url.Action("Details", new { id = item.RUID })" class="btn btn-flat btn-sm btn-success" style="color:White;"><i class="fa fa-eye"></i> Lihat</a>
+                                <a href="@Url.Action("Edit", new { id = item.RUID })" class="btn btn-flat btn-sm btn-warning" style="color:White;"><i class="fa fa-edit "></i> Rubah</a>
+                                <a href="@Url.Action("Delete", new { id = item.RUID })" class="btn btn-flat btn-sm btn-danger" style="color:White;"><i class="fa fa-trash-o"></i> Hapus</a>
+                            </div> <!-- /.btn-group -->
+                        </td>
+                        <td class="col-xs-3">
+                            <div>@Html.DisplayFor(modelItem => item.RES_DEPT_NM)</div>
+                            <div>@Html.DisplayFor(modelItem => item.RES_JOB_TITLE_NM)</div>
+                        </td>
+                        <td class="col-xs-3">
+                            <div>
+                                @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.LEAVEFR_DT) - @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.LEAVETO_DT)
+                            </div>
+                            <div>@Html.DisplayFor(modelItem => item.LEAVE_NUM) hari</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+@section scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*=========================================
+        INITIALIZE
+        =========================================*/
+        doSearchAbleTable('#searchValue', '', '.SEARCHABLE_ROWS');
+
+        /*=========================================
+        EVENTS
+        =========================================*/
+    });   //End $(document).ready
+</script>
+
+}
