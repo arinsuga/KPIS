@@ -1,1 +1,0 @@
-sqlcmd -U sa -P MyPassword -S localhost -d master -i Script.sql
