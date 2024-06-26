@@ -1,2 +1,2 @@
-# HRIS
-Human Resources Information System
+# KPIS
+Key Performance Indicator System
